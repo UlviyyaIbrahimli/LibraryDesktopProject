@@ -40,6 +40,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -69,6 +70,7 @@ public class ReaderInfoFrame extends javax.swing.JFrame {
     private GiveBackBookService giveBackBookService;
     private LoginService loginService;
     private RoleService roleService;
+    private  StatusService statusService;
     private Login login;
     ButtonGroup buttonGroup = new ButtonGroup();
     ButtonGroup buttonGroupGender = new ButtonGroup();
@@ -99,7 +101,8 @@ public class ReaderInfoFrame extends javax.swing.JFrame {
             GiveBackBookService giveBackBookService,
             LoginService loginService,
             RoleService roleService,
-            Login login) {
+            Login login,
+            StatusService statusService) {
         try {
             this.departmentService = departmentService;
             this.employeeService = employeeService;
@@ -122,6 +125,7 @@ public class ReaderInfoFrame extends javax.swing.JFrame {
             this.loginService = loginService;
             this.roleService = roleService;
             this.login = login;
+            this.statusService=statusService;
             initComponents();
             buttonGroupGender.add(allRadio);
             buttonGroupGender.add(maleRadio);
@@ -1174,7 +1178,7 @@ public class ReaderInfoFrame extends javax.swing.JFrame {
 
     private void backBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn2ActionPerformed
         this.dispose();
-        ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         firstFrame.setVisible(true);
     }//GEN-LAST:event_backBtn2ActionPerformed
 

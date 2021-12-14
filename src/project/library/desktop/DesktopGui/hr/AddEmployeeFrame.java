@@ -1973,8 +1973,8 @@ public class AddEmployeeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nationalityComboItemStateChanged
 
     private void femaleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleRadioActionPerformed
-        femaleRadio.setText("female");
-        femaleRadio.setActionCommand("female");
+        femaleRadio.setText("Female");
+        femaleRadio.setActionCommand("Female");
         if (femaleRadio.isSelected()) {
             genderInfo.setVisible(false);
         }

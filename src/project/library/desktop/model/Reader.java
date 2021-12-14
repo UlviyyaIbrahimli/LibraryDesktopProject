@@ -32,7 +32,16 @@ public class Reader extends AbstractClass {
     private String homePhone;
     private String additionInfo;
     private Book book;
+    private  Status status1;
 
+    public Status getStatus1() {
+        return status1;
+    }
+
+    public void setStatus1(Status status1) {
+        this.status1 = status1;
+    }
+    
     public Book getBook() {
         return book;
     }

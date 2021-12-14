@@ -38,6 +38,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -68,6 +69,7 @@ public class GiveBackBookFrame extends javax.swing.JFrame {
     private LoginService loginService;
     private RoleService roleService;
     private Login login;
+    private  StatusService statusService;
     ButtonGroup buttonGroup = new ButtonGroup();
     String searchWord;
 
@@ -778,7 +780,7 @@ public class GiveBackBookFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-        LoginFrame frame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService);
+        LoginFrame frame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService,statusService);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 

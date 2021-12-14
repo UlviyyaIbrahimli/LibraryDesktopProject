@@ -32,6 +32,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -61,6 +62,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private GiveBackBookService giveBackBookService;
     private LoginService loginService;
     private RoleService roleService;
+    private  StatusService statusService;
     
     public LoginFrame() {
         initComponents();
@@ -85,7 +87,8 @@ public class LoginFrame extends javax.swing.JFrame {
             OrderInHomeService orderInHomeService,
             GiveBackBookService giveBackBookService,
             LoginService loginService,
-            RoleService roleService) {
+            RoleService roleService,
+            StatusService statusService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
         this.branchService = branchService;
@@ -106,6 +109,7 @@ public class LoginFrame extends javax.swing.JFrame {
         this.giveBackBookService = giveBackBookService;
         this.loginService = loginService;
         this.roleService = roleService;
+        this.statusService=statusService;
         initComponents();
         this.setDefaultLookAndFeelDecorated(true);
         this.setLocationRelativeTo(null);
@@ -687,7 +691,7 @@ public class LoginFrame extends javax.swing.JFrame {
                                 frame1.setVisible(true);
                             } else if (roleName.equals("Library Assistant IV")) {
                                 this.dispose();
-                                ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+                                ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
                                 firstFrame.setVisible(true);
                             } else if (roleName.equals("Library Assistant V")) {
                                 this.dispose();
@@ -695,7 +699,7 @@ public class LoginFrame extends javax.swing.JFrame {
                                 orderInfoFrame.setVisible(true);
                             } else if (roleName.equals("Security")) {
                                 this.dispose();
-                                SecurityFrame securityFrame = new SecurityFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+                                SecurityFrame securityFrame = new SecurityFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
                                 securityFrame.setVisible(true);
                                 //.. if to want , be add
                             } else if (roleName.equals("Admin")
@@ -704,7 +708,7 @@ public class LoginFrame extends javax.swing.JFrame {
                                     || roleName.equals("Deputy")
                                     || roleName.equals("Library Assistant I")) {
                                 this.dispose();
-                                DispatcherFrame dispatcherFrame = new DispatcherFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, roleName, login);
+                                DispatcherFrame dispatcherFrame = new DispatcherFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, roleName, login,statusService);
                                 dispatcherFrame.setVisible(true);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Your role has not been clarified yet !");

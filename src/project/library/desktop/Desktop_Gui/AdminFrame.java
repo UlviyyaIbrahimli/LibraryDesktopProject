@@ -28,6 +28,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -58,6 +59,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private LoginService loginService;
     private RoleService roleService;
     private Login login;
+    private  StatusService statusService;
     String global = "";
     
     public AdminFrame() {
@@ -84,7 +86,8 @@ public class AdminFrame extends javax.swing.JFrame {
             GiveBackBookService giveBackBookService,
             LoginService loginService,
             RoleService roleService,
-            Login login) {
+            Login login,
+            StatusService  statusService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
         this.branchService = branchService;
@@ -107,6 +110,7 @@ public class AdminFrame extends javax.swing.JFrame {
         this.roleService = roleService;
         this.login = login;
         this.login = login;
+        this.statusService=statusService;
         initComponents();
         this.setDefaultLookAndFeelDecorated(true);
         this.pack();
@@ -364,7 +368,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 break;
             case "role":
                 this.dispose();
-                AddRoleFrame addRoleFrame = new AddRoleFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+                AddRoleFrame addRoleFrame = new AddRoleFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
                 addRoleFrame.setVisible(true);
                 break;
         }
@@ -378,12 +382,12 @@ public class AdminFrame extends javax.swing.JFrame {
                 switch (global) {
                     case "role":
                         this.dispose();
-                        UpdateRoleFrame roleFrame = new UpdateRoleFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login);
+                        UpdateRoleFrame roleFrame = new UpdateRoleFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login,statusService);
                         roleFrame.setVisible(true);
                         break;
                     case "login":
                         this.dispose();
-                        UpdateLoginFrame loginFrame = new UpdateLoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login);
+                        UpdateLoginFrame loginFrame = new UpdateLoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login,statusService);
                         loginFrame.setVisible(true);
                         break;
                 }
@@ -422,7 +426,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         this.dispose();
-        DispatcherFrame df = new DispatcherFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, global, login);
+        DispatcherFrame df = new DispatcherFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, global, login,statusService);
         df.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
 

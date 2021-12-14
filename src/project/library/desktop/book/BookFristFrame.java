@@ -40,6 +40,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -70,6 +71,7 @@ public class BookFristFrame extends javax.swing.JFrame {
     private LoginService loginService;
     private RoleService roleService;
     private Login login;
+    private StatusService statusService;
     String a;
     ButtonGroup buttonGroup = new ButtonGroup();
     ButtonGroup buttonGroupWith = new ButtonGroup();
@@ -952,7 +954,7 @@ public class BookFristFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
-        LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService);
+        LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService,statusService);
         loginFrame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

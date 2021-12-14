@@ -15,8 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
+import project.library.desktop.Desktop_Gui.Item;
 import project.library.desktop.model.Login;
 import project.library.desktop.model.Reader;
+import project.library.desktop.model.Status;
+import project.library.desktop.model.employee.Branch;
 import project.library.desktop.service.AuthorService;
 import project.library.desktop.service.BookRoomService;
 import project.library.desktop.service.BookService;
@@ -35,6 +38,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -64,6 +68,7 @@ public class AddReaderFrame extends javax.swing.JFrame {
     private GiveBackBookService giveBackBookService;
     private LoginService loginService;
     private RoleService roleService;
+  private  StatusService statusService;
     private Login login;
     String keyword = "";
     String countrySearch = "";
@@ -93,7 +98,8 @@ public class AddReaderFrame extends javax.swing.JFrame {
             GiveBackBookService giveBackBookService,
             LoginService loginService,
             RoleService roleService,
-            Login login) {
+            Login login,
+            StatusService statusService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
         this.branchService = branchService;
@@ -115,6 +121,7 @@ public class AddReaderFrame extends javax.swing.JFrame {
         this.loginService = loginService;
         this.roleService = roleService;
         this.login = login;
+        this.statusService=statusService;
         initComponents();
         this.setDefaultLookAndFeelDecorated(true);
         this.pack();
@@ -130,6 +137,7 @@ public class AddReaderFrame extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        showStatusCombo();
         nationalityCombo.setVisible(false);
         hideWarning();
         countryCombo.setVisible(false);
@@ -958,11 +966,15 @@ public class AddReaderFrame extends javax.swing.JFrame {
 
         statusCombo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         statusCombo.setForeground(new java.awt.Color(0, 0, 51));
-        statusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Status", "Student", "Pupil", "Employee", "Unemployed" }));
         statusCombo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         statusCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 statusComboItemStateChanged(evt);
+            }
+        });
+        statusCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusComboActionPerformed(evt);
             }
         });
 
@@ -973,6 +985,11 @@ public class AddReaderFrame extends javax.swing.JFrame {
         countryCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 countryComboItemStateChanged(evt);
+            }
+        });
+        countryCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                countryComboActionPerformed(evt);
             }
         });
 
@@ -1195,7 +1212,9 @@ public class AddReaderFrame extends javax.swing.JFrame {
                                                         String homeNumber = homeNumberTxt.getText();
                                                         String houseNumber = houseNumberTxt.getText();
                                                         if (statusCombo.getSelectedIndex() > 0) {
-                                                            String status = (String) statusCombo.getSelectedItem();
+                                                            Item statusItem = (Item) statusCombo.getSelectedItem(); 
+                                                                System.out.println("status  "+statusItem.getId());
+//                                                            String status = (String) statusCombo.getSelectedItem();
                                                             Date startMember = startMemberCalendar.getDate();
                                                             if (startMember != null) {
                                                                 Date pullMember = pullMemberCalendar.getDate();
@@ -1223,7 +1242,9 @@ public class AddReaderFrame extends javax.swing.JFrame {
                                                                                 reader.setStartMemberDate(startMember);
                                                                                 reader.setHomePhone(homePhone);
                                                                                 reader.seteMail(email);
-                                                                                reader.setStatus(status);
+                                                                                Status status1= new Status();
+                                                                                status1.setId(statusItem.getId());
+                                                                                reader.setStatus1(status1);
                                                                                 reader.setCity(city);
                                                                                 reader.setAdditionInfo(additionI);
                                                                                 boolean isAddRader = readerService.addReader(reader);
@@ -1365,7 +1386,7 @@ public class AddReaderFrame extends javax.swing.JFrame {
 
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
         this.dispose();
-        ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        ReaderFirstFrame firstFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         firstFrame.setVisible(true);
 
     }//GEN-LAST:event_backBtn1ActionPerformed
@@ -1581,10 +1602,6 @@ public class AddReaderFrame extends javax.swing.JFrame {
         countryWTxt.setVisible(false);
     }//GEN-LAST:event_countryComboItemStateChanged
 
-    private void statusComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_statusComboItemStateChanged
-        statusWTxt.setVisible(false);
-    }//GEN-LAST:event_statusComboItemStateChanged
-
     private void genderWTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderWTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genderWTxtActionPerformed
@@ -1621,6 +1638,18 @@ public class AddReaderFrame extends javax.swing.JFrame {
         pullDateWTxt.setVisible(false);
 
     }//GEN-LAST:event_pullMemberCalendarMouseEntered
+
+    private void statusComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_statusComboItemStateChanged
+        statusWTxt.setVisible(false);
+    }//GEN-LAST:event_statusComboItemStateChanged
+
+    private void statusComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusComboActionPerformed
+
+    private void countryComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countryComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_countryComboActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1882,10 +1911,11 @@ public class AddReaderFrame extends javax.swing.JFrame {
         try {
             List<String> cars = readerService.getCardNumbers();
             for (String card : cars) {
+                if(card!=null){
                 if (card.equals(cardNumber)) {
                     result = false;
                 }
-            }
+            }}
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1896,14 +1926,29 @@ public class AddReaderFrame extends javax.swing.JFrame {
         boolean result = true;
         try {
             List<String> cars = readerService.getIdentity();
+                         
             for (String card : cars) {
+                if(card!=null){
                 if (card.equals(cardNumber)) {
                     result = false;
                 }
-            }
+            }}
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return result;
+    }
+    
+       private void showStatusCombo() {
+        try {
+            List<Status> statusList = statusService.getStatusList();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) statusCombo.getModel();
+            model.addElement(new Item((long) 0, "Select Status"));
+            for (Status status : statusList) {
+                model.addElement(new Item(status.getId(), status.getStatus()));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -9,6 +9,7 @@ import project.library.desktop.dao.LanguageDao;
 import project.library.desktop.dao.ReadRoomDao;
 import project.library.desktop.dao.ReadTableDao;
 import project.library.desktop.dao.ReaderDao;
+import project.library.desktop.dao.StatusDao;
 import project.library.desktop.dao.SubjectDao;
 import project.library.desktop.dao.emp.BranchDao;
 import project.library.desktop.dao.emp.DepartmentDao;
@@ -39,6 +40,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -89,6 +91,8 @@ public class MainGui {
         LoginService loginService = new LoginService(loginDao);
         RoleDao roleDao = new RoleDao();
         RoleService roleService = new RoleService(roleDao);
+        StatusDao statusDao= new StatusDao();
+        StatusService statusService= new StatusService(statusDao);
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -96,7 +100,7 @@ public class MainGui {
                     break;
                 }
             }
-            LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService,loginService,roleService);
+            LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService,loginService,roleService,statusService);
             loginFrame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();

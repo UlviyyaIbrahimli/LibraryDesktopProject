@@ -4,7 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/service/ReaderService.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/DesktopGui/hr/AddEmployeeFrame.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/dao/ReaderDao.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/reader/AddReaderFrame.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/service/EmployeeService.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/dao/emp/EmployeeDao.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/LibraryDesktopProject/src/project/library/desktop/model/Reader.java</file>
         </group>
     </open-files>
 </project-private>

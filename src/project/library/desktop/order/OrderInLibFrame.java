@@ -1523,7 +1523,7 @@ public class OrderInLibFrame extends javax.swing.JFrame {
                 } else {
                     caseTxt.setText("unknow");
                 }
-                if (book.getAllBookCount() != 0) {
+                if (book.getAllBookCount() != 0&& book.getAllBookCount()!=null) {
                     countTxt.setText(String.valueOf(book.getAllBookCount()));
                 } else {
                     countTxt.setText("0");

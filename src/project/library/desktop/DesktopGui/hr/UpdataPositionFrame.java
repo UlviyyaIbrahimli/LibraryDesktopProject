@@ -456,7 +456,7 @@ public class UpdataPositionFrame extends javax.swing.JFrame {
                                 System.out.println("fv " + branchP.getId());
                                 boolean isAddPosition = positionService.updatePosition(selecteId, position);
                                 if (isAddPosition) {
-                                    JOptionPane.showMessageDialog(null, position.getPositionName().toUpperCase() + " - IS ADDED SUCCESSFULLY ", "SUCCESS", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\LibraryDesktopProject\\src\\project\\library\\desktop\\gui\\icon\\tick.png"));
+                                    JOptionPane.showMessageDialog(null, position.getPositionName().toUpperCase() + " - IS Update SUCCESSFULLY ", "SUCCESS", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\LibraryDesktopProject\\src\\project\\library\\desktop\\gui\\icon\\tick.png"));
                                 } else {
                                     JOptionPane.showMessageDialog(null, "POSITION IS NOT ADDED", "FAIL", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\LibraryDesktopProject\\src\\project\\library\\desktop\\gui\\icon\\report.png"));
                                 }

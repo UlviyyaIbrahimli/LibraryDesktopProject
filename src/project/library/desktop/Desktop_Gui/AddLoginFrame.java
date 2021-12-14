@@ -30,6 +30,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -60,6 +61,7 @@ public class AddLoginFrame extends javax.swing.JFrame {
     private LoginService loginService;
     private RoleService roleService;
     private Login login;
+    private  StatusService statusService;
 
     public AddLoginFrame() {
         initComponents();
@@ -107,6 +109,7 @@ public class AddLoginFrame extends javax.swing.JFrame {
         this.loginService = loginService;
         this.roleService = roleService;
         this.login = login;
+        this.statusService=statusService;
         initComponents();
         this.setDefaultLookAndFeelDecorated(true);
         this.pack();
@@ -489,7 +492,7 @@ ADD CONSTRAINT uniq UNIQUE(user_name, password); // composite candidade key
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         this.dispose();
-        AdminFrame adminFrame = new AdminFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        AdminFrame adminFrame = new AdminFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         adminFrame.setVisible(true);
 
     }//GEN-LAST:event_backBtnActionPerformed
@@ -528,7 +531,7 @@ ADD CONSTRAINT uniq UNIQUE(user_name, password); // composite candidade key
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
-        AdminFrame adminFrame = new AdminFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        AdminFrame adminFrame = new AdminFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         adminFrame.setVisible(true);
     }//GEN-LAST:event_cancelBtnActionPerformed
 

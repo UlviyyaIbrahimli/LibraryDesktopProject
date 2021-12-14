@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import project.library.desktop.model.Book;
+import project.library.desktop.model.Status;
 
 /**
  *
@@ -102,6 +103,9 @@ public class ReaderDao implements IReader {
 
     @Override
     public boolean addReader(Reader reader) throws Exception {
+        System.out.println("rgttrh  "+reader.getStatus1().getId());
+        System.err.println("nagt  "+reader.getNationality());
+        System.err.println("country  "+reader.getCountry());
         boolean result = false;
         Connection c = null;
         PreparedStatement pr = null;
@@ -117,7 +121,7 @@ public class ReaderDao implements IReader {
             if (c != null) {
                 if (reader.getDob() != null) {
                     String sql
-                            = "Insert into reader(id,f_name,l_name,father_name,dob,gender,nationality,identify_number,card_number,START_MEMBER_DATE,PULL_MEMBER_DATE,addition_info,status)"
+                            = "Insert into reader(id,f_name,l_name,father_name,dob,gender,identify_number,card_number,START_MEMBER_DATE,PULL_MEMBER_DATE,addition_info,StatusId,nationality)"
                             + "VALUES(READER_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pr = c.prepareStatement(sql);
                     pr.setString(1, reader.getFirstName());
@@ -125,13 +129,14 @@ public class ReaderDao implements IReader {
                     pr.setString(3, reader.getFatherName());
                     pr.setDate(4, new java.sql.Date(reader.getDob().getTime()));
                     pr.setString(5, reader.getGender());
-                    pr.setString(6, reader.getNationality());
-                    pr.setString(7, reader.getIdentifyNumber());
-                    pr.setString(8, reader.getCardNumber());
-                    pr.setDate(9, new java.sql.Date(reader.getStartMemberDate().getTime()));
-                    pr.setDate(10, new java.sql.Date(reader.getPullMemberDate().getTime()));
-                    pr.setString(11, reader.getAdditionInfo());
-                    pr.setString(12, reader.getStatus());
+//                    pr.setString(6, reader.getNationality());
+                    pr.setString(6, reader.getIdentifyNumber());
+                    pr.setString(7, reader.getCardNumber());
+                    pr.setDate(8, new java.sql.Date(reader.getStartMemberDate().getTime()));
+                    pr.setDate(9, new java.sql.Date(reader.getPullMemberDate().getTime()));
+                    pr.setString(10, reader.getAdditionInfo());
+                    pr.setLong(11, reader.getStatus1().getId());
+                    pr.setString(12, reader.getNationality());
                     pr.addBatch();
                     pr.executeBatch();
                     pr = c.prepareStatement(sql2);
@@ -152,8 +157,8 @@ public class ReaderDao implements IReader {
                     result = true;
                 } else {
                     String sql1
-                            = "Insert into reader(id,f_name,l_name,father_name,gender,nationality,identify_number,card_number,START_MEMBER_DATE,PULL_MEMBER_DATE,addition_info,status)"
-                            + "VALUES(READER_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+                            = "Insert into reader(id,f_name,l_name,father_name,gender,nationality,identify_number,card_number,START_MEMBER_DATE,PULL_MEMBER_DATE,addition_info,statusId,nationality)"
+                            + "VALUES(READER_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pr = c.prepareStatement(sql1);
                     pr.setString(1, reader.getFirstName());
                     pr.setString(2, reader.getLastName());
@@ -166,7 +171,8 @@ public class ReaderDao implements IReader {
                     pr.setDate(8, new java.sql.Date(reader.getStartMemberDate().getTime()));
                     pr.setDate(9, new java.sql.Date(reader.getPullMemberDate().getTime()));
                     pr.setString(10, reader.getAdditionInfo());
-                    pr.setString(11, reader.getStatus());
+                    pr.setLong(11, reader.getStatus1().getId());
+                    pr.setString(12, reader.getNationality());
                     pr.addBatch();
                     pr.executeBatch();
                     pr = c.prepareStatement(sql2);
@@ -214,7 +220,7 @@ public class ReaderDao implements IReader {
             if (c != null) {
                 if (reader.getDob() != null) {
                     String sql11
-                            = " UPDATE READER SET f_name=?,l_name=?,father_name=?,dob=?,gender=?,nationality=?,identify_number=?,card_number=?,START_MEMBER_DATE=?,PULL_MEMBER_DATE=?,PENALTY=?, ADDITION_INFO=?, ACTIVITY=?,STATUS=? WHERE ID=?";
+                            = " UPDATE READER SET f_name=?,l_name=?,father_name=?,dob=?,gender=?,nationality=?,identify_number=?,card_number=?,START_MEMBER_DATE=?,PULL_MEMBER_DATE=?,PENALTY=?, ADDITION_INFO=?, ACTIVITY=?,STATUSID=? WHERE ID=?";
                     pr = c.prepareStatement(sql11);
                     pr.setString(1, reader.getFirstName());
                     pr.setString(2, reader.getLastName());
@@ -229,7 +235,7 @@ public class ReaderDao implements IReader {
                     pr.setFloat(11, reader.getPenalty());
                     pr.setString(12, reader.getAdditionInfo());
                     pr.setInt(13, reader.getActivity());
-                    pr.setString(14, reader.getStatus());
+                    pr.setLong(14, reader.getStatus1().getId());
                     pr.setLong(15, id);
                     pr.execute();
                     pr = c.prepareStatement(sql2);
@@ -251,7 +257,7 @@ public class ReaderDao implements IReader {
 
                 } else if (reader.getDob() == null) {
                     String sql11
-                            = " UPDATE READER SET f_name=?,l_name=?,father_name=?,dob=?,gender=?,nationality=?,identify_number=?,card_number=?,START_MEMBER_DATE=?,PULL_MEMBER_DATE=?,PENALTY=?, ADDITION_INFO=?, ACTIVITY=?,STATUS=? WHERE ID=?";
+                            = " UPDATE READER SET f_name=?,l_name=?,father_name=?,dob=?,gender=?,nationality=?,identify_number=?,card_number=?,START_MEMBER_DATE=?,PULL_MEMBER_DATE=?,PENALTY=?, ADDITION_INFO=?, ACTIVITY=?,STATUSID=? WHERE ID=?";
                     pr = c.prepareStatement(sql11);
                     pr.setString(1, reader.getFirstName());
                     pr.setString(2, reader.getLastName());
@@ -266,7 +272,7 @@ public class ReaderDao implements IReader {
                     pr.setFloat(11, reader.getPenalty());
                     pr.setString(12, reader.getAdditionInfo());
                     pr.setInt(13, reader.getActivity());
-                    pr.setString(14, reader.getStatus());
+                    pr.setLong(14, reader.getStatus1().getId());
                     pr.setLong(15, id);
                     pr.execute();
                     pr = c.prepareStatement(sql2);
@@ -353,7 +359,7 @@ public class ReaderDao implements IReader {
                 + "       R.CARD_NUMBER,\n"
                 + "       R.NATIONALITY,\n"
                 + "       R.ADDITION_INFO,\n"
-                + "       R.STATUS,\n"
+                + "       R.STATUSID,\n"
                 + "       R.START_MEMBER_DATE,\n"
                 + "       R.PULL_MEMBER_DATE,\n"
                 + "       R.PENALTY,\n"
@@ -366,12 +372,14 @@ public class ReaderDao implements IReader {
                 + "       RA.EMAIL,\n"
                 + "       RP.PHONE_1,\n"
                 + "       RP.PHONE_2,\n"
-                + "       RP.HOME_PHONE\n"
+                + "       RP.HOME_PHONE,"
+                + "       s.status\n"
                 + "  FROM READER R\n"
                 + "       LEFT JOIN READER_ADDRESS RA\n"
                 + "          ON R.ID = RA.READER_ID\n"
                 + "       LEFT JOIN READER_PHONE RP\n"
                 + "          ON R.ID = RP.READER_ID\n"
+                + "left join status s on s.id=r.statusId\n"
                 + " WHERE  r.id=?";
         try {
             c = DbHelper.getConnection();
@@ -395,7 +403,10 @@ public class ReaderDao implements IReader {
                     reader.setCountry(rs.getString("Country"));
                     reader.setAdditionInfo(rs.getString("ADDITION_INFO"));
                     reader.setCity(rs.getString("City"));
-                    reader.setStatus(rs.getString("status"));
+                    Status status= new Status();
+                    status.setId(rs.getLong("statusId"));
+                    status.setStatus(rs.getString("status"));
+                    reader.setStatus1(status);
                     reader.setStreet(rs.getString("street"));
                     reader.setHouseNumber(rs.getString("house_number"));
                     reader.setHomeNumber(rs.getString("home_number"));

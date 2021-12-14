@@ -29,6 +29,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -58,6 +59,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
     private GiveBackBookService giveBackBookService;
     private LoginService loginService;
     private RoleService roleService;
+    private StatusService statusService;
     private Login login;
 
     public ReaderFirstFrame() {
@@ -84,7 +86,8 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
             GiveBackBookService giveBackBookService,
             LoginService loginService,
             RoleService roleService,
-            Login login) {
+            Login login,
+            StatusService statusService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
         this.branchService = branchService;
@@ -106,6 +109,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
         this.loginService = loginService;
         this.roleService = roleService;
         this.login = login;
+        this.statusService=statusService;
         initComponents();
         this.setDefaultLookAndFeelDecorated(true);
         this.pack();
@@ -391,7 +395,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         this.dispose();
-        AddReaderFrame addReaderFrame = new AddReaderFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        AddReaderFrame addReaderFrame = new AddReaderFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         addReaderFrame.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
@@ -403,7 +407,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
             } else {
                 Long selectedId = (Long) table.getValueAt(selectedRow, 0);
                 this.dispose();
-                UpdateReaderFrame updateReaderFrame = new UpdateReaderFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login);
+                UpdateReaderFrame updateReaderFrame = new UpdateReaderFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, selectedId, login,statusService);
                 updateReaderFrame.setVisible(true);
             }
         } else {
@@ -444,7 +448,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        ReaderInfoFrame readerInfoFrame = new ReaderInfoFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        ReaderInfoFrame readerInfoFrame = new ReaderInfoFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         readerInfoFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -475,7 +479,7 @@ public class ReaderFirstFrame extends javax.swing.JFrame {
 
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
         this.dispose();
-        LoginFrame frame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService);
+        LoginFrame frame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService,statusService);
         frame.setVisible(true);
 
     }//GEN-LAST:event_backBtn1ActionPerformed

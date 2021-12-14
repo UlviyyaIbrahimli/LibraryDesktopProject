@@ -14,8 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
+import project.library.desktop.Desktop_Gui.Item;
 import project.library.desktop.model.Login;
 import project.library.desktop.model.Reader;
+import project.library.desktop.model.Status;
 import project.library.desktop.service.AuthorService;
 import project.library.desktop.service.BookRoomService;
 import project.library.desktop.service.BookService;
@@ -34,6 +36,7 @@ import project.library.desktop.service.ReadRoomService;
 import project.library.desktop.service.ReadTableService;
 import project.library.desktop.service.ReaderService;
 import project.library.desktop.service.RoleService;
+import project.library.desktop.service.StatusService;
 import project.library.desktop.service.SubjectService;
 import project.library.desktop.service.TimeTypeService;
 
@@ -63,6 +66,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
     private GiveBackBookService giveBackBookService;
     private LoginService loginService;
     private RoleService roleService;
+    private  StatusService statusService;
     private Long selectedId;
     private Login login;
     String keyword = "";
@@ -72,7 +76,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    UpdateReaderFrame(DepartmentService departmentService, PositionService positionService, BranchService branchService, EmployeeService employeeService, TimeTypeService timeTypeService, EducationTypeService educationTypeService, BookService bookService, AuthorService authorService, SubjectService subjectService, BookShelfService bookShelfService, BookRoomService bookRoomService, ReadRoomService readRoomService, ReadTableService readTableService, LanguageService languageService, ReaderService readerService, OrderInLibService orderInLibService, OrderInHomeService orderInHomeService, GiveBackBookService giveBackBookService, LoginService loginService, RoleService roleService, Long selectedId, Login login) {
+    UpdateReaderFrame(DepartmentService departmentService, PositionService positionService, BranchService branchService, EmployeeService employeeService, TimeTypeService timeTypeService, EducationTypeService educationTypeService, BookService bookService, AuthorService authorService, SubjectService subjectService, BookShelfService bookShelfService, BookRoomService bookRoomService, ReadRoomService readRoomService, ReadTableService readTableService, LanguageService languageService, ReaderService readerService, OrderInLibService orderInLibService, OrderInHomeService orderInHomeService, GiveBackBookService giveBackBookService, LoginService loginService, RoleService roleService, Long selectedId, Login login,StatusService statusService) {
         try {
             this.departmentService = departmentService;
             this.employeeService = employeeService;
@@ -94,6 +98,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
             this.giveBackBookService = giveBackBookService;
             this.loginService = loginService;
             this.roleService = roleService;
+            this.statusService=statusService;
             this.selectedId = selectedId;
             this.login = login;
             initComponents();
@@ -112,7 +117,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
             } else {
                 countryCombo.setVisible(false);
             }
-            showOldComboStatuse(reader);
+//            showOldComboStatuse(reader);
             hideWarning();
             this.setDefaultLookAndFeelDecorated(true);
             this.pack();
@@ -124,7 +129,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
             nationalityCombo.setRenderer(new UpdateReaderFrame.TwoDecimalRenderer(nationalityCombo.getRenderer()));
             countryCombo.setRenderer(new UpdateReaderFrame.TwoDecimalRenderer(countryCombo.getRenderer()));
             statusCombo.setRenderer(new UpdateReaderFrame.TwoDecimalRenderer(statusCombo.getRenderer()));
-
+              showStatusOldCombo(reader);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -667,9 +672,7 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
                                     .addComponent(phone1Txt)
                                     .addComponent(identityTxt, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(emailTxt)))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(actTxtW, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)))))
+                            .addComponent(actTxtW, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29))
         );
         jPanel4Layout.setVerticalGroup(
@@ -777,11 +780,16 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
 
         statusCombo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         statusCombo.setForeground(new java.awt.Color(0, 0, 51));
-        statusCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Status", "Student", "Pupil", "Employee", "Unemployed" }));
+        statusCombo.setToolTipText("");
         statusCombo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         statusCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 statusComboItemStateChanged(evt);
+            }
+        });
+        statusCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusComboActionPerformed(evt);
             }
         });
 
@@ -1509,7 +1517,8 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
                                                         String homeNumber = homeNumberTxt.getText();
                                                         String houseNumber = houseNumberTxt.getText();
                                                         if (statusCombo.getSelectedIndex() > 0) {
-                                                            String status = (String) statusCombo.getSelectedItem();
+                                                               Item statusItem = (Item) statusCombo.getSelectedItem(); 
+                                                                System.out.println("status  "+statusItem.getId());
                                                             Date startMember = startMemberCalendar.getDate();
                                                             if (startMember != null) {
                                                                 Date pullMember = pullMemberCalendar.getDate();
@@ -1538,7 +1547,9 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
                                                                                 reader.setStartMemberDate(startMember);
                                                                                 reader.setHomePhone(homePhone);
                                                                                 reader.seteMail(email);
-                                                                                reader.setStatus(status);
+                                                                                Status status= new Status();
+                                                                                status.setId(statusItem.getId());
+                                                                                reader.setStatus1(status);
                                                                                 reader.setCity(city);
                                                                                 reader.setAdditionInfo(additionI);
                                                                                 reader.setPenalty(Float.parseFloat(penalty));
@@ -1674,19 +1685,23 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
 
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
         this.dispose();
-        ReaderFirstFrame readerInfoFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        ReaderFirstFrame readerInfoFrame = new ReaderFirstFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         readerInfoFrame.setVisible(true);
     }//GEN-LAST:event_backBtn1ActionPerformed
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         this.dispose();
-        ReaderInfoFrame readerInfoFrame = new ReaderInfoFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login);
+        ReaderInfoFrame readerInfoFrame = new ReaderInfoFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService, login,statusService);
         readerInfoFrame.setVisible(true);
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void activityComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityComboActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_activityComboActionPerformed
+
+    private void statusComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusComboActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1814,21 +1829,21 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
         activityCombo.setSelectedItem(String.valueOf(reader.getActivity()));
     }
 
-    void showOldComboStatuse(Reader reader) {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) statusCombo.getModel();
-        String[] statuss = {"Pupil", "Student", "Employee", "UnEmployee"};
-        model.removeAllElements();
-        model.addElement("Select Status");
-        for (String status : statuss) {
-            model.addElement(status);
-        }
-        String a = reader.getStatus();
-        if (a != null) {
-            model.setSelectedItem(reader.getStatus());
-        } else {
-            statusCombo.setSelectedIndex(0);
-        }
-    }
+//    void showOldComboStatuse(Reader reader) {
+//        DefaultComboBoxModel model = (DefaultComboBoxModel) statusCombo.getModel();
+//        String[] statuss = {"Pupil", "Student", "Employee", "UnEmployee"};
+//        model.removeAllElements();
+//        model.addElement("Select Status");
+//        for (String status : statuss) {
+//            model.addElement(status);
+//        }
+//        String a = reader.getStatus();
+//        if (a != null) {
+//            model.setSelectedItem(reader.getStatus());
+//        } else {
+//            statusCombo.setSelectedIndex(0);
+//        }
+//    }
 
     void showNationality(String keyword) {
         DefaultComboBoxModel model = (DefaultComboBoxModel) nationalityCombo.getModel();
@@ -2121,5 +2136,30 @@ public class UpdateReaderFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         return result;
+    }
+      private void showStatusCombo() {
+        try {
+            List<Status> statusList = statusService.getStatusList();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) statusCombo.getModel();
+            model.addElement(new Item((long) 0, "Select Status"));
+            for (Status status : statusList) {
+                model.addElement(new Item(status.getId(), status.getStatus()));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+            private void showStatusOldCombo(Reader reader) {
+        try {
+            List<Status> statusList = statusService.getStatusList();
+            DefaultComboBoxModel model = (DefaultComboBoxModel) statusCombo.getModel();
+            model.addElement(new Item((long) 0, "Select Status"));
+            model.setSelectedItem(reader.getStatus1().getStatus());
+            for (Status status : statusList) {
+                model.addElement(new Item(status.getId(), status.getStatus()));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

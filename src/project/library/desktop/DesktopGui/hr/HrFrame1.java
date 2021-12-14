@@ -46,6 +46,7 @@ public class HrFrame1 extends javax.swing.JFrame {
     private LoginService loginService;
     private RoleService roleService;
     private Login login;
+    private  StatusService statusService;
     ButtonGroup buttonGroup = new ButtonGroup();
 
     public HrFrame1() {
@@ -1035,7 +1036,7 @@ public class HrFrame1 extends javax.swing.JFrame {
 
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
         this.dispose();
-        LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService);
+        LoginFrame loginFrame = new LoginFrame(departmentService, positionService, branchService, employeeService, timeTypeService, educationTypeService, bookService, authorService, subjectService, bookShelfService, bookRoomService, readRoomService, readTableService, languageService, readerService, orderInLibService, orderInHomeService, giveBackBookService, loginService, roleService,statusService);
         loginFrame.setVisible(true);
     }//GEN-LAST:event_backBtn1ActionPerformed
 

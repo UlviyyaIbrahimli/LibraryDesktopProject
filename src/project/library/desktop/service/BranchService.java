@@ -32,7 +32,6 @@ public class BranchService implements IBranchService {
         return branchDao.getBranchById(id);
     }
 
-    @Override
     public boolean updateBranch(Long id, Branch branch) throws Exception {
         return branchDao.updateBranch(id, branch);
     }
